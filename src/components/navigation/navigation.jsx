@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./navigation.css";
 import logo from "../../assets/logo.png";
+import msnSound from "../../assets/frutiger.mp3"; // Sound effect tayyor import qilindi
 
 export default function Navi() {
     const containerRef = useRef(null);
@@ -63,33 +64,14 @@ export default function Navi() {
         }
     };
 
-    const playSound = (toAero) => {
+    // MP3 faylini ijro etuvchi funksiya
+    const playMSNSound = () => {
         try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-
-            if (toAero) {
-                osc.type = "sine";
-                osc.frequency.setValueAtTime(150, ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.15);
-                osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.2, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-            } else {
-                osc.type = "sawtooth";
-                osc.frequency.setValueAtTime(600, ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.35);
-                gain.gain.setValueAtTime(0.12, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-            }
-
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start();
-            osc.stop(ctx.currentTime + 0.35);
+            const audio = new Audio(msnSound);
+            audio.currentTime = 0; // Ketma-ket tez bosilganda ovoz qaytadan boshlanishi uchun
+            audio.play();
         } catch (e) {
-            console.log("Audio error", e);
+            console.log("MP3 play error", e);
         }
     };
 
@@ -126,7 +108,9 @@ export default function Navi() {
 
         const nextState = !isAero;
         setIsAero(nextState);
-        playSound(nextState);
+
+        // Har safar logotip bosilganda mp3 faylingiz yangraydi
+        playMSNSound();
     };
 
     return (
