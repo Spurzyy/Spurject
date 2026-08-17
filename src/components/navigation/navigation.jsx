@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./navigation.css";
 import logo from "../../assets/logo.png";
-import msnSound from "../../assets/frutiger.mp3"; // Sound effect tayyor import qilindi
+import msnSound from "../../assets/frutiger.mp3"; 
+
 
 export default function Navi() {
     const containerRef = useRef(null);
@@ -64,12 +65,10 @@ export default function Navi() {
         }
     };
 
-    // MP3 faylini ijro etuvchi funksiya
     const playMSNSound = () => {
         try {
             const audio = new Audio(msnSound);
-            audio.currentTime = 0; // Ketma-ket tez bosilganda ovoz qaytadan boshlanishi uchun
-            audio.play();
+            audio.currentTime = 0; audio.play();
         } catch (e) {
             console.log("MP3 play error", e);
         }
@@ -86,13 +85,13 @@ export default function Navi() {
                 prev.map((b) =>
                     b.id === id
                         ? {
-                              ...b,
-                              popped: false,
-                              left: Math.random() * 90 + 5,
-                              size: Math.random() * 40 + 20,
-                              duration: Math.random() * 5 + 6,
-                              delay: 0,
-                          }
+                            ...b,
+                            popped: false,
+                            left: Math.random() * 90 + 5,
+                            size: Math.random() * 40 + 20,
+                            duration: Math.random() * 5 + 6,
+                            delay: 0,
+                        }
                         : b
                 )
             );
@@ -109,7 +108,6 @@ export default function Navi() {
         const nextState = !isAero;
         setIsAero(nextState);
 
-        // Har safar logotip bosilganda mp3 faylingiz yangraydi
         playMSNSound();
     };
 
@@ -145,8 +143,8 @@ export default function Navi() {
 
             <div className="navrealholder">
                 <div className="navholder">
-                    <div 
-                        className={`logo-wrapper ${isSpinning ? "spin-active" : ""}`} 
+                    <div
+                        className={`logo-wrapper ${isSpinning ? "spin-active" : ""}`}
                         onClick={handleLogoClick}
                         title="Toggle Aesthetics!"
                     >
