@@ -8,7 +8,6 @@ export default function Navi() {
     const [isSpinning, setIsSpinning] = useState(false);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
-    // Initial 12 ta interaktiv pufakchalar
     const initialBubbles = Array.from({ length: 12 }, (_, i) => ({
         id: i,
         left: Math.random() * 90 + 5,
@@ -20,7 +19,6 @@ export default function Navi() {
 
     const [bubbles, setBubbles] = useState(initialBubbles);
 
-    // Aero rejim yoqilganda pufakchalarni tiklash
     useEffect(() => {
         if (isAero) {
             setBubbles(initialBubbles);
@@ -40,13 +38,11 @@ export default function Navi() {
         containerRef.current.style.setProperty("--y", `-1000px`);
     };
 
-    // 100% Realistik Pufakcha Yorilishi Ovozi (Web Audio API Synthesizer)
     const playPopSound = () => {
         try {
             const AudioCtx = window.AudioContext || window.webkitAudioContext;
             const ctx = new AudioCtx();
 
-            // 1. Tonal "POP" tebranishi (Pufakcha tarangligi)
             const osc = ctx.createOscillator();
             const oscGain = ctx.createGain();
 
@@ -60,7 +56,6 @@ export default function Navi() {
             osc.connect(oscGain);
             oscGain.connect(ctx.destination);
 
-            // 2. Oq Shovqin / "PUF" effekti (Havo bosimi va parda yorilishi)
             const bufferSize = ctx.sampleRate * 0.02; // 20ms
             const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
             const data = buffer.getChannelData(0);
@@ -94,7 +89,6 @@ export default function Navi() {
         }
     };
 
-    // Rejim o'tish ovozlari
     const playSound = (toAero) => {
         try {
             const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -125,14 +119,12 @@ export default function Navi() {
         }
     };
 
-    // Pufakchani bosganda yorish logikasi
     const popBubble = (id) => {
         playPopSound();
         setBubbles((prev) =>
             prev.map((b) => (b.id === id ? { ...b, popped: true } : b))
         );
 
-        // 2 soniyadan keyin poqillagan pufakcha o'rniga yangisini hosil qilish
         setTimeout(() => {
             setBubbles((prev) =>
                 prev.map((b) =>
@@ -174,7 +166,6 @@ export default function Navi() {
 
             {!isAero && <div className="grid-glow"></div>}
 
-            {/* REALISTIK INTERAKTIV PUFAKCHALAR */}
             {isAero && (
                 <div className="aero-bubbles">
                     {bubbles.map((b) => (
