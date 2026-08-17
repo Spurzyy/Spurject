@@ -1,20 +1,17 @@
 .navcontainer {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
     overflow: hidden;
-    background-color: #020612;
-
-    background-image: 
-        radial-gradient(circle at 90% 0%, #1d90ff 0%, rgba(0, 110, 255, 0.6) 25%, rgba(2, 20, 60, 0.8) 55%, transparent 80%),
-        radial-gradient(ellipse 60% 50% at 100% 0%, rgba(180, 230, 255, 0.45) 0%, transparent 60%);
+    background-color: #030712;
+    background-image: radial-gradient(circle at 85% 0%, #00bcff 0%, #0052d4 25%, #051333 55%, #020612 85%);
+    transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navcontainer::before {
     content: "";
     position: absolute;
     inset: 0;
-
     background-image: 
         linear-gradient(rgba(0, 180, 255, 0.15) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 180, 255, 0.15) 1px, transparent 1px);
@@ -29,55 +26,51 @@
     z-index: 2;
     pointer-events: none;
     will-change: transform;
-
     background-image: 
         linear-gradient(rgba(0, 243, 255, 0.9) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 243, 255, 0.9) 1px, transparent 1px);
     background-size: 50px 50px;
-
-    mask-image: radial-gradient(
-        circle 180px at var(--x, -1000px) var(--y, -1000px),
-        rgba(0, 0, 0, 1) 0%,
-        rgba(0, 0, 0, 0.25) 55%,
-        transparent 100%
-    );
-    -webkit-mask-image: radial-gradient(
-        circle 180px at var(--x, -1000px) var(--y, -1000px),
-        rgba(0, 0, 0, 1) 0%,
-        rgba(0, 0, 0, 0.25) 55%,
-        transparent 100%
-    );
+    mask-image: radial-gradient(circle 180px at var(--x, -1000px) var(--y, -1000px), rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle 180px at var(--x, -1000px) var(--y, -1000px), rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 100%);
 }
 
 .navrealholder {
-    padding-top: 40px;
+    padding-top: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
     position: relative;
     z-index: 10;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .navholder {
-    width: 620px;
+    width: 100%;
+    max-width: 720px;
     height: 60px;
     padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-radius: 50px;
-
     background: rgba(8, 20, 45, 0.45);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-
     border: 1px solid rgba(80, 200, 255, 0.25);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+}
+
+.logo-img {
+    width: 38px;
+    height: auto;
 }
 
 .nav {
     gap: 30px;
     display: flex;
+    align-items: center;
 }
 
 .nav a {
@@ -102,24 +95,17 @@
     transition: width 0.3s ease;
 }
 
-.nav a:hover::after {
-    width: 100%;
-}
-
-.nav a:hover {
-    color: #ffffff;
-}
+.nav a:hover::after { width: 100%; }
+.nav a:hover { color: #ffffff; }
 
 .github-button {
     background: linear-gradient(135deg, #09132b, #030712);
     color: #00f3ff;
     font-size: 14px;
     font-weight: 600;
-
     border: 1px solid rgba(0, 243, 255, 0.4);
     padding: 8px 22px;
     border-radius: 30px;
-
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -129,6 +115,23 @@
     color: #ffffff;
     background: linear-gradient(135deg, #00f3ff, #0077ff);
     border-color: transparent;
+}
+
+.mobile-only-btn { display: none; }
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.hamburger span {
+    width: 24px;
+    height: 2px;
+    background-color: #00f3ff;
+    transition: all 0.3s ease;
 }
 
 .logo-wrapper {
@@ -156,166 +159,6 @@
     100% { transform: scale(1) rotate(360deg); }
 }
 
-.navcontainer.cyan-theme {
-    background-image: 
-        radial-gradient(circle at 85% 0%, #00f3ff 0%, #0066ff 25%, #020b24 60%, #020612 90%);
-}
-
-.navcontainer.cyan-theme .grid-glow {
-    background-image: 
-        linear-gradient(rgba(0, 255, 170, 0.95) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 170, 0.95) 1px, transparent 1px);
-}
-
-.navcontainer.frutiger-aero {
-    background-color: #00aaff;
-    background-image: 
-        radial-gradient(circle at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0.8) 20%, transparent 60%),
-        linear-gradient(180deg, #00bfff 0%, #00d2ff 40%, #02aab0 75%, #00cdac 100%);
-    transition: background 0.8s ease;
-}
-
-.navcontainer.frutiger-aero::before {
-    
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
-}
-
-
-.navcontainer.frutiger-aero .navholder {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.25) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 
-        0 12px 32px rgba(0, 100, 180, 0.3),
-        inset 0 2px 3px rgba(255, 255, 255, 0.9),
-        inset 0 -2px 5px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-
-
-.navcontainer.frutiger-aero .nav a {
-    color: #003b66;
-    font-weight: 600;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-.navcontainer.frutiger-aero .nav a::after {
-    background: #0077ff;
-    box-shadow: 0 0 6px #00d9ff;
-}
-
-.navcontainer.frutiger-aero .nav a:hover {
-    color: #001133;
-}
-
-
-.navcontainer.frutiger-aero .github-button {
-    background: linear-gradient(180deg, #38ef7d 0%, #11998e 100%);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 
-        0 4px 15px rgba(17, 153, 142, 0.4),
-        inset 0 2px 2px rgba(255, 255, 255, 0.6);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.navcontainer.frutiger-aero .github-button:hover {
-    background: linear-gradient(180deg, #42f587 0%, #0e857b 100%);
-    box-shadow: 0 6px 20px rgba(17, 153, 142, 0.6);
-}
-
-
-.aero-bubbles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.bubble {
-    position: absolute;
-    bottom: -100px;
-    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.6) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    box-shadow: inset -2px -2px 6px rgba(0, 100, 200, 0.2);
-    animation: rise 8s infinite linear;
-}
-
-.b1 { width: 40px; height: 40px; left: 15%; animation-duration: 7s; }
-.b2 { width: 70px; height: 70px; left: 40%; animation-duration: 10s; animation-delay: 1s; }
-.b3 { width: 30px; height: 30px; left: 70%; animation-duration: 6s; animation-delay: 2s; }
-.b4 { width: 90px; height: 90px; left: 85%; animation-duration: 12s; animation-delay: 0.5s; }
-
-@keyframes rise {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 0;
-    }
-    10% { opacity: 0.8; }
-    90% { opacity: 0.8; }
-    100% {
-        transform: translateY(-120vh) scale(1.2);
-        opacity: 0;
-    }
-}
-
-
-.navcontainer {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-    background-color: #030712;
-    background-image: radial-gradient(circle at 85% 0%, #00bcff 0%, #0052d4 25%, #051333 55%, #020612 85%);
-    
-
-    transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.transition-wave {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0px;
-    height: 0px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(0, 210, 255, 0.5) 40%, transparent 70%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 20;
-    opacity: 0;
-}
-
-
-.navcontainer.in-transition .transition-wave {
-    animation: rippleEffect 0.8s ease-out forwards;
-}
-
-@keyframes rippleEffect {
-    0% {
-        width: 0px;
-        height: 0px;
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.8;
-    }
-    100% {
-        width: 250vmax;
-        height: 250vmax;
-        opacity: 0;
-    }
-}
-
-
-.navholder, .nav a, .github-button {
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-
 .navcontainer.frutiger-aero {
     background-color: #00aaff;
     background-image: 
@@ -332,52 +175,15 @@
 .navcontainer.frutiger-aero .navholder {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
     border: 1px solid rgba(255, 255, 255, 0.85);
-    box-shadow: 
-        0 12px 35px rgba(0, 100, 180, 0.3),
-        inset 0 2px 4px rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 12px 35px rgba(0, 100, 180, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.9);
 }
 
-.navcontainer.frutiger-aero .nav a {
-    color: #003b66;
-    font-weight: 600;
-}
-
+.navcontainer.frutiger-aero .nav a { color: #003b66; font-weight: 600; }
 .navcontainer.frutiger-aero .github-button {
     background: linear-gradient(180deg, #38ef7d 0%, #11998e 100%);
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.7);
     box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
-}
-
-
-.aero-bubbles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.bubble {
-    position: absolute;
-    bottom: -100px;
-    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.6) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    animation: rise 8s infinite linear;
-}
-
-.b1 { width: 40px; height: 40px; left: 15%; animation-duration: 7s; }
-.b2 { width: 70px; height: 70px; left: 40%; animation-duration: 10s; animation-delay: 1s; }
-.b3 { width: 30px; height: 30px; left: 70%; animation-duration: 6s; animation-delay: 2s; }
-.b4 { width: 90px; height: 90px; left: 85%; animation-duration: 12s; animation-delay: 0.5s; }
-
-@keyframes rise {
-    0% { transform: translateY(0) scale(1); opacity: 0; }
-    10% { opacity: 0.8; }
-    90% { opacity: 0.8; }
-    100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
 }
 
 .aero-bubbles {
@@ -393,57 +199,89 @@
     background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.75) 100%);
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 50%;
-    box-shadow: 
-        inset -2px -2px 8px rgba(0, 100, 200, 0.25),
-        0 4px 15px rgba(255, 255, 255, 0.4);
+    box-shadow: inset -2px -2px 8px rgba(0, 100, 200, 0.25), 0 4px 15px rgba(255, 255, 255, 0.4);
     pointer-events: auto;
     cursor: pointer;
-    transition: transform 0.15s ease, opacity 0.15s ease;
     animation: rise infinite linear;
 }
 
-.bubble:hover {
-    transform: scale(1.15);
-    filter: brightness(1.2);
-}
-
-/* Poqillash (POP) animatsiyasi */
-.bubble.popped {
-    animation: popEffect 0.15s ease-out forwards !important;
-    pointer-events: none;
-}
+.bubble.popped { animation: popEffect 0.15s ease-out forwards !important; pointer-events: none; }
 
 @keyframes popEffect {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.4);
-        opacity: 0.8;
-        border-width: 3px;
-    }
-    100% {
-        transform: scale(1.8);
-        opacity: 0;
-    }
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.8; }
+    100% { transform: scale(1.8); opacity: 0; }
 }
 
 @keyframes rise {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.85;
-    }
-    90% {
-        opacity: 0.85;
-    }
-    100% {
-        transform: translateY(-120vh) scale(1.1);
-        opacity: 0;
-    }
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 0.85; }
+    90% { opacity: 0.85; }
+    100% { transform: translateY(-120vh) scale(1.1); opacity: 0; }
 }
 
-/* nigga */
+.transition-wave {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0px; height: 0px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(0, 210, 255, 0.5) 40%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 20;
+    opacity: 0;
+}
+
+.navcontainer.in-transition .transition-wave { animation: rippleEffect 0.8s ease-out forwards; }
+
+@keyframes rippleEffect {
+    0% { width: 0px; height: 0px; opacity: 1; }
+    100% { width: 250vmax; height: 250vmax; opacity: 0; }
+}
+
+@media (max-width: 1024px) {
+    .navholder { width: 90%; }
+}
+
+@media (max-width: 768px) {
+    .navrealholder { padding-top: 15px; }
+    
+    .desktop-btn { display: none; }
+    .mobile-only-btn { display: block; margin-top: 10px; }
+    
+    .hamburger { display: flex; }
+    
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav {
+        position: absolute;
+        top: 75px;
+        left: 0;
+        right: 0;
+        background: rgba(8, 20, 45, 0.9);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 25px;
+        border-radius: 25px;
+        border: 1px solid rgba(80, 200, 255, 0.25);
+        gap: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+    }
+
+    .navcontainer.frutiger-aero .nav {
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .nav.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+}

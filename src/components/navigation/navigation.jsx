@@ -7,11 +7,12 @@ export default function Navi() {
     const [isAero, setIsAero] = useState(false);
     const [isSpinning, setIsSpinning] = useState(false);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const initialBubbles = Array.from({ length: 12 }, (_, i) => ({
         id: i,
         left: Math.random() * 90 + 5,
-        size: Math.random() * 50 + 30,
+        size: Math.random() * 40 + 20,
         duration: Math.random() * 5 + 6,
         delay: Math.random() * 4,
         popped: false
@@ -42,7 +43,6 @@ export default function Navi() {
         try {
             const AudioCtx = window.AudioContext || window.webkitAudioContext;
             const ctx = new AudioCtx();
-
             const osc = ctx.createOscillator();
             const oscGain = ctx.createGain();
 
@@ -56,34 +56,8 @@ export default function Navi() {
             osc.connect(oscGain);
             oscGain.connect(ctx.destination);
 
-            const bufferSize = ctx.sampleRate * 0.02; // 20ms
-            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
-
-            const noise = ctx.createBufferSource();
-            noise.buffer = buffer;
-
-            const filter = ctx.createBiquadFilter();
-            filter.type = "highpass";
-            filter.frequency.value = 1000;
-
-            const noiseGain = ctx.createGain();
-            noiseGain.gain.setValueAtTime(0.2, ctx.currentTime);
-            noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.02);
-
-            noise.connect(filter);
-            filter.connect(noiseGain);
-            noiseGain.connect(ctx.destination);
-
             osc.start(ctx.currentTime);
             osc.stop(ctx.currentTime + 0.04);
-
-            noise.start(ctx.currentTime);
-            noise.stop(ctx.currentTime + 0.02);
         } catch (e) {
             console.log("Audio play error", e);
         }
@@ -133,7 +107,7 @@ export default function Navi() {
                               ...b,
                               popped: false,
                               left: Math.random() * 90 + 5,
-                              size: Math.random() * 50 + 30,
+                              size: Math.random() * 40 + 20,
                               duration: Math.random() * 5 + 6,
                               delay: 0,
                           }
@@ -192,22 +166,34 @@ export default function Navi() {
                         onClick={handleLogoClick}
                         title="Toggle Aesthetics!"
                     >
-                        <img width="38" src={logo} alt="Logo" />
+                        <img src={logo} alt="Logo" className="logo-img" />
                     </div>
 
-                    <nav className="nav">
-                        <a href="#">Services</a>
-                        <a href="#">Experiences</a>
-                        <a href="#">Works</a>
+                    <nav className={`nav ${menuOpen ? "open" : ""}`}>
+                        <a href="#" onClick={() => setMenuOpen(false)}>Services</a>
+                        <a href="#" onClick={() => setMenuOpen(false)}>Experiences</a>
+                        <a href="#" onClick={() => setMenuOpen(false)}>Works</a>
+                        <button
+                            onClick={() => (window.location.href = "https://github.com/Spurzyy")}
+                            className="github-button mobile-only-btn"
+                        >
+                            Github
+                        </button>
                     </nav>
 
                     <button
                         title="View me on Github"
                         onClick={() => (window.location.href = "https://github.com/Spurzyy")}
-                        className="github-button"
+                        className="github-button desktop-btn"
                     >
                         Github
                     </button>
+
+                    <div className={`hamburger ${menuOpen ? "active" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
             </div>
         </div>
