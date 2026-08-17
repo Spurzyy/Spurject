@@ -1,0 +1,489 @@
+/* =========================
+   BASE BACKGROUND
+========================= */
+.navcontainer {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: #020612;
+
+    /* O'ng yuqoridan tushayotgan yumshoq va tabiiy ko'k quyosh nuri */
+    background-image: 
+        radial-gradient(circle at 90% 0%, #1d90ff 0%, rgba(0, 110, 255, 0.6) 25%, rgba(2, 20, 60, 0.8) 55%, transparent 80%),
+        radial-gradient(ellipse 60% 50% at 100% 0%, rgba(180, 230, 255, 0.45) 0%, transparent 60%);
+}
+
+/* =========================
+   BLUE GRID PATTERN (PANJARA)
+========================= */
+.navcontainer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    /* Tiniq va nozik panjara liniyalari */
+    background-image: 
+        linear-gradient(rgba(0, 180, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 180, 255, 0.15) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* =========================
+   CYBERPUNK GLOW ON HOVER (SMOOTH & LIGHTWEIGHT)
+========================= */
+.grid-glow {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    will-change: transform;
+
+    background-image: 
+        linear-gradient(rgba(0, 243, 255, 0.9) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.9) 1px, transparent 1px);
+    background-size: 50px 50px;
+
+    mask-image: radial-gradient(
+        circle 180px at var(--x, -1000px) var(--y, -1000px),
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.25) 55%,
+        transparent 100%
+    );
+    -webkit-mask-image: radial-gradient(
+        circle 180px at var(--x, -1000px) var(--y, -1000px),
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.25) 55%,
+        transparent 100%
+    );
+}
+
+/* =========================
+   NAV WRAPPER & COMPONENTS
+========================= */
+.navrealholder {
+    padding-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+}
+
+.navholder {
+    width: 620px;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 50px;
+
+    background: rgba(8, 20, 45, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(80, 200, 255, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.nav {
+    gap: 30px;
+    display: flex;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #a5c2e0;
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background: #00f3ff;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.nav a:hover::after {
+    width: 100%;
+}
+
+.nav a:hover {
+    color: #ffffff;
+}
+
+.github-button {
+    background: linear-gradient(135deg, #09132b, #030712);
+    color: #00f3ff;
+    font-size: 14px;
+    font-weight: 600;
+
+    border: 1px solid rgba(0, 243, 255, 0.4);
+    padding: 8px 22px;
+    border-radius: 30px;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.github-button:hover {
+    transform: translateY(-2px);
+    color: #ffffff;
+    background: linear-gradient(135deg, #00f3ff, #0077ff);
+    border-color: transparent;
+}
+
+/* =========================
+   LOGO EASTER EGG STYLES
+========================= */
+.logo-wrapper {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+.logo-wrapper:hover {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 10px #00f3ff);
+}
+
+/* Spin Animation */
+.logo-wrapper.spin-active {
+    animation: logoSpin 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes logoSpin {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.3) rotate(180deg); }
+    100% { transform: scale(1) rotate(360deg); }
+}
+
+/* Dynamic Theme Switch (Logoga bosilganda ranglar yanada yorqinlashadi) */
+.navcontainer.cyan-theme {
+    background-image: 
+        radial-gradient(circle at 85% 0%, #00f3ff 0%, #0066ff 25%, #020b24 60%, #020612 90%);
+}
+
+.navcontainer.cyan-theme .grid-glow {
+    background-image: 
+        linear-gradient(rgba(0, 255, 170, 0.95) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 170, 0.95) 1px, transparent 1px);
+}
+
+/* =========================
+   FRUTIGER AERO SUBSTYLE THEME
+========================= */
+
+/* Aero Background: Musaffo osmon, tropik suv va yashil maysa gradienti */
+.navcontainer.frutiger-aero {
+    background-color: #00aaff;
+    background-image: 
+        radial-gradient(circle at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0.8) 20%, transparent 60%),
+        linear-gradient(180deg, #00bfff 0%, #00d2ff 40%, #02aab0 75%, #00cdac 100%);
+    transition: background 0.8s ease;
+}
+
+.navcontainer.frutiger-aero::before {
+    /* Aero rejimida panjarani mayin, oq va shaffof qilish */
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+}
+
+/* Glassmorphism Vista Bar */
+.navcontainer.frutiger-aero .navholder {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.25) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 12px 32px rgba(0, 100, 180, 0.3),
+        inset 0 2px 3px rgba(255, 255, 255, 0.9),
+        inset 0 -2px 5px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Navigatsiya havolalari (Aero Style) */
+.navcontainer.frutiger-aero .nav a {
+    color: #003b66;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.navcontainer.frutiger-aero .nav a::after {
+    background: #0077ff;
+    box-shadow: 0 0 6px #00d9ff;
+}
+
+.navcontainer.frutiger-aero .nav a:hover {
+    color: #001133;
+}
+
+/* Glossy Aero Tugma */
+.navcontainer.frutiger-aero .github-button {
+    background: linear-gradient(180deg, #38ef7d 0%, #11998e 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+        0 4px 15px rgba(17, 153, 142, 0.4),
+        inset 0 2px 2px rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.navcontainer.frutiger-aero .github-button:hover {
+    background: linear-gradient(180deg, #42f587 0%, #0e857b 100%);
+    box-shadow: 0 6px 20px rgba(17, 153, 142, 0.6);
+}
+
+/* =========================
+   BUBBLES ANIMATION (FRUTIGER AERO)
+========================= */
+.aero-bubbles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.6) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    box-shadow: inset -2px -2px 6px rgba(0, 100, 200, 0.2);
+    animation: rise 8s infinite linear;
+}
+
+.b1 { width: 40px; height: 40px; left: 15%; animation-duration: 7s; }
+.b2 { width: 70px; height: 70px; left: 40%; animation-duration: 10s; animation-delay: 1s; }
+.b3 { width: 30px; height: 30px; left: 70%; animation-duration: 6s; animation-delay: 2s; }
+.b4 { width: 90px; height: 90px; left: 85%; animation-duration: 12s; animation-delay: 0.5s; }
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% {
+        transform: translateY(-120vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   BASE CONTAINER TRANSITION
+========================= */
+.navcontainer {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: #030712;
+    background-image: radial-gradient(circle at 85% 0%, #00bcff 0%, #0052d4 25%, #051333 55%, #020612 85%);
+    
+    /* Rejimlar almashganda silliq 0.8s o'tish */
+    transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================
+   TRANSITION WAVE / FLASH EFFECT
+========================= */
+.transition-wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0px;
+    height: 0px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(0, 210, 255, 0.5) 40%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 20;
+    opacity: 0;
+}
+
+/* Rejim almashayotganda to'lqin kabi portlab kattalashishi */
+.navcontainer.in-transition .transition-wave {
+    animation: rippleEffect 0.8s ease-out forwards;
+}
+
+@keyframes rippleEffect {
+    0% {
+        width: 0px;
+        height: 0px;
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        width: 250vmax;
+        height: 250vmax;
+        opacity: 0;
+    }
+}
+
+/* =========================
+   SMOOTH ELEMENTS TRANSITION
+========================= */
+.navholder, .nav a, .github-button {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================
+   FRUTIGER AERO STYLES
+========================= */
+.navcontainer.frutiger-aero {
+    background-color: #00aaff;
+    background-image: 
+        radial-gradient(circle at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0.85) 20%, transparent 60%),
+        linear-gradient(180deg, #00bfff 0%, #00d2ff 40%, #02aab0 75%, #00cdac 100%);
+}
+
+.navcontainer.frutiger-aero::before {
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+}
+
+.navcontainer.frutiger-aero .navholder {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 
+        0 12px 35px rgba(0, 100, 180, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.navcontainer.frutiger-aero .nav a {
+    color: #003b66;
+    font-weight: 600;
+}
+
+.navcontainer.frutiger-aero .github-button {
+    background: linear-gradient(180deg, #38ef7d 0%, #11998e 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
+}
+
+/* =========================
+   BUBBLES ANIMATION
+========================= */
+.aero-bubbles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.6) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: rise 8s infinite linear;
+}
+
+.b1 { width: 40px; height: 40px; left: 15%; animation-duration: 7s; }
+.b2 { width: 70px; height: 70px; left: 40%; animation-duration: 10s; animation-delay: 1s; }
+.b3 { width: 30px; height: 30px; left: 70%; animation-duration: 6s; animation-delay: 2s; }
+.b4 { width: 90px; height: 90px; left: 85%; animation-duration: 12s; animation-delay: 0.5s; }
+
+@keyframes rise {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+}
+
+/* =========================
+   INTERACTIVE BUBBLES
+========================= */
+.aero-bubbles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.75) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 
+        inset -2px -2px 8px rgba(0, 100, 200, 0.25),
+        0 4px 15px rgba(255, 255, 255, 0.4);
+    pointer-events: auto;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    animation: rise infinite linear;
+}
+
+.bubble:hover {
+    transform: scale(1.15);
+    filter: brightness(1.2);
+}
+
+/* Poqillash (POP) animatsiyasi */
+.bubble.popped {
+    animation: popEffect 0.15s ease-out forwards !important;
+    pointer-events: none;
+}
+
+@keyframes popEffect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.4);
+        opacity: 0.8;
+        border-width: 3px;
+    }
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.85;
+    }
+    90% {
+        opacity: 0.85;
+    }
+    100% {
+        transform: translateY(-120vh) scale(1.1);
+        opacity: 0;
+    }
+}
+
+/* nigga */
