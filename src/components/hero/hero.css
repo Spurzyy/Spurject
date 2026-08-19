@@ -1,0 +1,97 @@
+.introduction {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 30;
+    width: 90%;
+    max-width: 750px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 30px;
+    border-radius: 24px;
+    background: rgba(8, 20, 45, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(80, 200, 255, 0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.introduction h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+    transition: all 0.6s ease;
+}
+
+.introduction p {
+    font-size: 1.2rem;
+    color: #a5c2e0;
+    margin-bottom: 25px;
+    transition: all 0.6s ease;
+}
+
+.intro-btn {
+    background: linear-gradient(135deg, #00f3ff, #0077ff);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 243, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.intro-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 243, 255, 0.5);
+}
+
+.navcontainer.frutiger-aero .introduction {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.15) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 
+        0 20px 40px rgba(0, 80, 150, 0.25),
+        inset 0 2px 3px rgba(255, 255, 255, 0.9),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navcontainer.frutiger-aero .introduction h1 {
+    color: #003366;
+    text-shadow: 
+        0 2px 4px rgba(255, 255, 255, 0.8),
+        0 0 12px rgba(255, 255, 255, 0.9);
+}
+
+.navcontainer.frutiger-aero .introduction p {
+    color: #004d80;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.navcontainer.frutiger-aero .intro-btn {
+    background: linear-gradient(180deg, #7be2ff 0%, #00aaff 48%, #0077e6 52%, #0055b3 100%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    font-weight: 700;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 
+        0 8px 20px rgba(0, 119, 230, 0.4),
+        inset 0 2px 3px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 4px rgba(0, 30, 80, 0.4);
+}
+
+.navcontainer.frutiger-aero .intro-btn:hover {
+    background: linear-gradient(180deg, #99eaff 0%, #1ab2ff 48%, #0080ff 52%, #0066cc 100%);
+    box-shadow: 
+        0 12px 25px rgba(0, 170, 255, 0.6),
+        inset 0 2px 5px rgba(255, 255, 255, 0.9);
+}

@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./navigation.css";
 import logo from "../../assets/logo.png";
-import msnSound from "../../assets/frutiger.mp3"; 
-
+import msnSound from "../../assets/frutiger.mp3";
 
 export default function Navi() {
     const containerRef = useRef(null);
+    const audioCtxRef = useRef(null);
     const [isAero, setIsAero] = useState(false);
     const [isSpinning, setIsSpinning] = useState(false);
     const [isTransitioning, setIsTransitioning] = useState(false);
@@ -21,6 +21,17 @@ export default function Navi() {
     }));
 
     const [bubbles, setBubbles] = useState(initialBubbles);
+
+    const getAudioContext = () => {
+        if (!audioCtxRef.current) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            audioCtxRef.current = new AudioCtx();
+        }
+        if (audioCtxRef.current.state === "suspended") {
+            audioCtxRef.current.resume();
+        }
+        return audioCtxRef.current;
+    };
 
     useEffect(() => {
         if (isAero) {
@@ -43,8 +54,7 @@ export default function Navi() {
 
     const playPopSound = () => {
         try {
-            const AudioCtx = window.AudioContext || window.webkitAudioContext;
-            const ctx = new AudioCtx();
+            const ctx = getAudioContext();
             const osc = ctx.createOscillator();
             const oscGain = ctx.createGain();
 
@@ -52,7 +62,7 @@ export default function Navi() {
             osc.frequency.setValueAtTime(1200, ctx.currentTime);
             osc.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.04);
 
-            oscGain.gain.setValueAtTime(0.5, ctx.currentTime);
+            oscGain.gain.setValueAtTime(0.4, ctx.currentTime);
             oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
 
             osc.connect(oscGain);
@@ -68,14 +78,18 @@ export default function Navi() {
     const playMSNSound = () => {
         try {
             const audio = new Audio(msnSound);
-            audio.currentTime = 0; audio.play();
+            audio.currentTime = 0;
+            audio.play();
         } catch (e) {
             console.log("MP3 play error", e);
         }
     };
 
-    const popBubble = (id) => {
+
+    const popBubble = (e, id) => {
+        e.stopPropagation();
         playPopSound();
+
         setBubbles((prev) =>
             prev.map((b) => (b.id === id ? { ...b, popped: true } : b))
         );
@@ -98,7 +112,10 @@ export default function Navi() {
         }, 2000);
     };
 
-    const handleLogoClick = () => {
+
+    const handleLogoClick = (e) => {
+        e.stopPropagation();
+
         setIsSpinning(true);
         setTimeout(() => setIsSpinning(false), 700);
 
@@ -112,7 +129,7 @@ export default function Navi() {
     };
 
     return (
-        <div
+        <div className="all"
             ref={containerRef}
             className={`navcontainer ${isAero ? "frutiger-aero" : ""} ${isTransitioning ? "in-transition" : ""}`}
             onMouseMove={handleMouseMove}
@@ -128,7 +145,7 @@ export default function Navi() {
                         <div
                             key={b.id}
                             className={`bubble ${b.popped ? "popped" : ""}`}
-                            onClick={() => !b.popped && popBubble(b.id)}
+                            onClick={(e) => !b.popped && popBubble(e, b.id)}
                             style={{
                                 left: `${b.left}%`,
                                 width: `${b.size}px`,
